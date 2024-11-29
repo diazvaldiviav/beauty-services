@@ -17,16 +17,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          lfs: false
           
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install Dependencies
-        run: npm install
-        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -37,4 +28,3 @@ jobs:
           app_location: "/" # La ubicación de tu package.json
           api_location: "" # Vacío si no tienes API
           output_location: "build" # Donde se genera el build
-          app_build_command: "npm run build"
