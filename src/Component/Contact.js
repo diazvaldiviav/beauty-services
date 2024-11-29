@@ -27,13 +27,13 @@ const Contact = () => {
               <div className="contact-item">
                 <h3>Social Media</h3>
                 <div className="social-icons">
-                  <a href="#" aria-label="Pinterest">
+                  <a href="https://www.pinterest.com/" aria-label="Pinterest">
                     <FaPinterest />
                   </a>
-                  <a href="#" aria-label="Twitter">
+                  <a href="https://x.com/i/flow/login" aria-label="Twitter">
                     <FaTwitter />
                   </a>
-                  <a href="#" aria-label="Instagram">
+                  <a href="https://www.instagram.com/" aria-label="Instagram">
                     <FaInstagram />
                   </a>
                 </div>
