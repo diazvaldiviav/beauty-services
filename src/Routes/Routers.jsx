@@ -2,7 +2,11 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../Component/Home';
 import LoadingSpinner from '../Component/LoadingSpinner';
+<<<<<<< HEAD
 import { Navigate } from 'react-router-dom';
+=======
+import {Navigate } from 'react-router-dom';
+>>>>>>> db48b16391bcdc0d802d2d89c4d58850c522171e
 import { useAuth } from '../Context/AuthContext';
 
 // Lazy loading de componentes existentes
