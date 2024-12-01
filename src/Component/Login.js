@@ -26,14 +26,28 @@ const Login = () => {
     try {
       // Aquí irá la llamada a tu API de autenticación
       // Por ahora simulamos una autenticación exitosa
+      // Verificar si es el admin
+      if (formData.email === 'admin' && formData.password === 'admin123') {
+        const adminData = {
+          id: 'admin',
+          email: 'admin',
+          name: 'Administrador',
+          role: 'admin'
+        };
+        login(adminData);
+        navigate('/admin'); // Redirige al dashboard de admin
+        return;
+      }
+       
       const userData = {
         id: 1,
         email: formData.email,
-        name: 'Usuario Demo'
+        name: 'Usuario Demo',
+        role: 'user'
       };
 
-      login(userData);
-      navigate('/'); // Redirigir al inicio después del login
+      await login(userData);
+      navigate('/');
     } catch (err) {
       setError('Credenciales inválidas');
     }
@@ -49,7 +63,7 @@ const Login = () => {
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               value={formData.email}

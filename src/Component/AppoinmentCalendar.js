@@ -3,8 +3,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes, addDays } from 'date-fns';
 
-const AppointmentCalendar = ({ onSelectDateTime }) => {
+const AppointmentCalendar = ({ onSelectDateTime, bookedTimes }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+
 
   // Horario de trabajo: 9:00 AM a 6:00 PM
   const minTime = setHours(setMinutes(new Date(), 0), 9);
@@ -24,6 +25,18 @@ const AppointmentCalendar = ({ onSelectDateTime }) => {
       onSelectDateTime(date);
     }
   };
+
+  const filterAvailableTime = (time) => {
+    // Verificar si la hora ya está reservada
+    const isBooked = bookedTimes?.some(bookedTime => {
+      const booked = new Date(bookedTime);
+      return time.getTime() === booked.getTime();
+    });
+
+    return !isBooked && filterPassedTime(time);
+  };
+
+  
 
   return (
     <div className="appointment-calendar">
@@ -45,6 +58,7 @@ const AppointmentCalendar = ({ onSelectDateTime }) => {
         excludeTimes={[
           setHours(setMinutes(new Date(), 0), 13), // Hora de almuerzo
         ]}
+        highlightDates={bookedTimes}
         // Excluir domingos
         filterDate={date => date.getDay() !== 0}
       />

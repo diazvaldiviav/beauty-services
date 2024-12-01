@@ -78,37 +78,3 @@ const Services = (props) => {
 };
 
 export default Services;
-
-
-
-{/*import React from 'react';
-import '../Styles/Style.css';
-// import services from '../Data/Services';
-import Card from './Card';
-import { Link } from 'react-router-dom';
-import aboutPhoto from "../assets/header_photo2.jpg";
-
-
-const Services = (props) => {
- 
-  return (
-   <React.StrictMode> 
-    <div className='service-title'><h1>Our Services</h1></div>
-    <section className="services">
-      {props.services.map(service => (
-        <Link to={`/Services/${service.id}`} key={service.id} className="card-link">
-        <Card
-          key={service.id}
-          imageUrl={aboutPhoto}
-          name={service.name}
-          description={service.description}
-        />
-         </Link>
-      ))}
-     
-    </section>
-    </React.StrictMode>
-  );
-};
-
-export default Services;*/}

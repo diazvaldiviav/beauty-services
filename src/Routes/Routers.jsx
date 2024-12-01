@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../Component/Home';
 import LoadingSpinner from '../Component/LoadingSpinner';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 
 // Lazy loading de componentes existentes
@@ -11,6 +11,20 @@ const LazyServiceDetails = lazy(() => import('../Component/ServiceDetails'));
 const LazyCheckout = lazy(() => import('../Component/Checkout'));
 const LazyLogin = lazy(() => import('../Component/Login'));
 const LazyRegister = lazy(() => import('../Component/Register'));
+const LazyAdminDashboard = lazy(() => import('../Component/Admin/Dashboard'));
+
+// Componente para rutas protegidas de admin
+const AdminRoute = ({ children }) => {
+  const { user, isAdmin } = useAuth();
+  if (!user || !isAdmin()) return <Navigate to="/login" replace />;
+
+  return children;
+};
+
+
+
+
+
 
 // Componente PrivateRoute para proteger rutas
 const PrivateRoute = ({ children }) => {
@@ -22,6 +36,9 @@ const PrivateRoute = ({ children }) => {
   
   return children;
 };
+
+
+
 
  
 
@@ -38,6 +55,8 @@ const Routers = () => {
         <Route path="/Checkout" element={<LazyCheckout />} />
         <Route path="/login" element={<LazyLogin />} />
         <Route path="/register" element={<LazyRegister />} />
+        
+        
 
          {/* Rutas protegidas */}
          <Route path="/Cart" element={
@@ -51,6 +70,24 @@ const Routers = () => {
             <LazyCheckout />
           </PrivateRoute>
         } />
+
+           {/* Rutas de admin */}
+        <Route 
+          path="/admin" 
+          element={
+            <AdminRoute>
+              <LazyAdminDashboard />
+            </AdminRoute>
+          } 
+        />
+        <Route 
+          path="/admin/*" 
+          element={
+            <AdminRoute>
+              <LazyAdminDashboard />
+            </AdminRoute>
+          } 
+        />
       </Routes>
     </Suspense>
     
