@@ -149,15 +149,6 @@ const Calendar = () => {
   
     // ================ FUNCIONES AUXILIARES ================
 
-    // Validar superposición de horarios
-    if (checkTimeOverlap(appointment)) {
-      toast.error('El horario se superpone con otra cita del mismo proveedor');
-      return false;
-    }
-
-    return true;
-  };
-
   // Verificar superposición de horarios
   const checkTimeOverlap = (newAppointment) => {
     const newStart = new Date(`${newAppointment.date}T${newAppointment.time}`);
@@ -226,7 +217,8 @@ const Calendar = () => {
     setSelectedAppointment(null);
   };
   // ================ RENDERIZADO ================
-  return (
+
+  return(
     <div className="calendar-container">
       {/* Barra de herramientas */}
       <div className="calendar-toolbar">
