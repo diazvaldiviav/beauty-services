@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { 
-  format, 
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  eachDayOfInterval,
-  isSameMonth,
-  isSameDay,
+  format,
   addMonths,
   subMonths,
   parseISO,
-  getHours,
-  getMinutes
 } from "date-fns";
 import { es } from "date-fns/locale";
 import { 
@@ -20,17 +11,11 @@ import {
   FaChevronRight, 
   FaPlus, 
   FaFilter, 
-  FaCog,
-  FaEdit,
-  FaTrash 
+  FaCog, 
 } from "react-icons/fa";
 
 // Importa los datos de prueba
-import mockAppointments, { 
-  AVAILABLE_SERVICES, 
-  SERVICE_PROVIDERS, 
-  APPOINTMENT_STATUS 
-} from '../../Data/mockAppointments'; // Nota el cambio aquí de mockAppointments a mockAppoiment
+import mockAppointments from '../../Data/mockAppointments'; // Nota el cambio aquí de mockAppointments a mockAppoiment
 
 
 // Importación de componentes
@@ -73,9 +58,6 @@ const Calendar = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Estados de filtros
-  const [selectedClient, setSelectedClient] = useState(null);
-  const [showMyVisitsOnly, setShowMyVisitsOnly] = useState(false);
 
   // ================ EFECTOS ================
 
@@ -135,13 +117,6 @@ const Calendar = () => {
 
   
 
-  // Abrir modal para editar cita
-  const handleEditAppointment = (appointment) => {
-    setIsEditing(true);
-    setSelectedAppointment(appointment);
-    setAppointmentForm(appointment);
-    setShowAppointmentModal(true);
-  };
 
   // Iniciar proceso de eliminación de cita
   const handleDeleteAppointment = (appointment) => {
@@ -171,14 +146,6 @@ const Calendar = () => {
 
   // ================ MANEJADORES DE FORMULARIO ================
 
-  // Manejar cambios en el formulario
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setAppointmentForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   // Manejar envío del formulario
   const handleSubmitAppointment = (e) => {
