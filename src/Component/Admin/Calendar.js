@@ -51,7 +51,6 @@ const Calendar = () => {
   // Estados relacionados con las citas
   const [appointments, setAppointments] = useState(mockAppointments);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [appointmentForm, setAppointmentForm] = useState(defaultAppointmentForm);
   
   // Estados de los modales
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
@@ -150,15 +149,6 @@ const Calendar = () => {
   
     // ================ FUNCIONES AUXILIARES ================
 
-  // Validar cita antes de guardar
-  const validateAppointment = (appointment) => {
-    // Validar que la fecha no sea en el pasado
-    const appointmentDateTime = new Date(`${appointment.date}T${appointment.time}`);
-    if (appointmentDateTime < new Date()) {
-      toast.error('No se pueden crear citas en el pasado');
-      return false;
-    }
-
     // Validar superposición de horarios
     if (checkTimeOverlap(appointment)) {
       toast.error('El horario se superpone con otra cita del mismo proveedor');
@@ -225,14 +215,6 @@ const Calendar = () => {
   };
 
   // ================ MANEJADORES DE MODALES ================
-
-  // Cerrar modal de citas
-  const handleCloseModal = () => {
-    setShowAppointmentModal(false);
-    setAppointmentForm(defaultAppointmentForm);
-    setIsEditing(false);
-    setSelectedAppointment(null);
-  };
 
   // Confirmar eliminación de cita
   const handleConfirmDelete = () => {
