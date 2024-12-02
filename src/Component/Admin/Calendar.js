@@ -27,17 +27,7 @@ import ConfirmationModal from './ConfimationModal';
 import { toast } from 'react-toastify';
 import "../../Styles/Admin.css";
 
-// Valores por defecto para el formulario de citas
-const defaultAppointmentForm = {
-  service: '',
-  provider: '',
-  client: '',
-  date: new Date().toISOString().split('T')[0],
-  time: '09:00',
-  duration: 60,
-  price: '',
-  status: 'pending'
-};
+
 
 const Calendar = () => {
   // ================ ESTADOS ================
@@ -143,30 +133,7 @@ const Calendar = () => {
   };
 
 
-  // ================ MANEJADORES DE FORMULARIO ================
-
-
-  
-    // ================ FUNCIONES AUXILIARES ================
-
-  // Verificar superposición de horarios
-  const checkTimeOverlap = (newAppointment) => {
-    const newStart = new Date(`${newAppointment.date}T${newAppointment.time}`);
-    const newEnd = new Date(newStart.getTime() + newAppointment.duration * 60000);
-
-    return appointments.some(existing => {
-      if (existing.id === newAppointment.id) return false;
-      
-      const existingStart = new Date(`${existing.date}T${existing.time}`);
-      const existingEnd = new Date(existingStart.getTime() + existing.duration * 60000);
-
-      return (
-        existing.provider === newAppointment.provider &&
-        newStart < existingEnd &&
-        newEnd > existingStart
-      );
-    });
-  };
+  // ================ MANEJADORES DE FORMULARIO ===============
 
   // Función mejorada para obtener citas de un día específico
   const getAppointmentsForDay = (day) => {
