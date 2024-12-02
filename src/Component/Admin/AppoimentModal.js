@@ -26,16 +26,7 @@ const AppointmentModal = ({
   const [formData, setFormData] = useState(initialState);
   const [selectedService, setSelectedService] = useState(null);
 
-  useEffect(() => {
-    if (appointment) {
-      setFormData(appointment);
-      const service = AVAILABLE_SERVICES.find(s => s.name === appointment.service);
-      setSelectedService(service);
-    } else {
-      setFormData(initialState);
-      setSelectedService(null);
-    }
-  }, [appointment]);
+
 
   const handleServiceChange = (e) => {
     const serviceId = parseInt(e.target.value);
