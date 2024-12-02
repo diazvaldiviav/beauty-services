@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [activeMenu, setActiveMenu] = useState('calendar');
   const [searchQuery, setSearchQuery] = useState('');
   const { logout } = useAuth();
-  const navigate = useNavigate();
   
 
 
