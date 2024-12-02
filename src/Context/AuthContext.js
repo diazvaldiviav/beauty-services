@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { createContext, useState, useContext,} from 'react';
-=======
-import React, { createContext, useState, useContext } from 'react';
->>>>>>> db48b16391bcdc0d802d2d89c4d58850c522171e
 
 const AuthContext = createContext(null);
 
