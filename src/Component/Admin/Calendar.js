@@ -147,31 +147,7 @@ const Calendar = () => {
   // ================ MANEJADORES DE FORMULARIO ================
 
 
-  // Manejar envío del formulario
-  const handleSubmitAppointment = (e) => {
-    e.preventDefault();
-    
-    const newAppointment = {
-      ...appointmentForm,
-      id: isEditing ? selectedAppointment.id : appointments.length + 1,
-    };
-
-    // Validar la cita antes de guardar
-    if (!validateAppointment(newAppointment)) return;
-
-    if (isEditing) {
-      setAppointments(prev => 
-        prev.map(apt => apt.id === newAppointment.id ? newAppointment : apt)
-      );
-      toast.success('Cita actualizada exitosamente');
-    } else {
-      setAppointments(prev => [...prev, newAppointment]);
-      toast.success('Cita creada exitosamente');
-    }
-
-    handleCloseModal();
-  };
-
+  
     // ================ FUNCIONES AUXILIARES ================
 
   // Validar cita antes de guardar
