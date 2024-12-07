@@ -4,6 +4,7 @@ import {
   AVAILABLE_SERVICES, 
   SERVICE_PROVIDERS 
 } from '../../Data/mockAppointments';
+import { toast } from 'react-toastify';
 
 const AppointmentModal = ({ 
   isOpen, 
@@ -22,6 +23,8 @@ const AppointmentModal = ({
     price: '',
     status: 'pending'
   };
+
+
 
   const [formData, setFormData] = useState(initialState);
   const [selectedService, setSelectedService] = useState(null);
@@ -61,13 +64,15 @@ const AppointmentModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const appointmentData = {
-      ...formData,
-      id: appointment?.id || Date.now(),
-      price: selectedService?.price.toString() || formData.price,
-      status: formData.status || 'pending'
-    };
-    onSave(appointmentData);
+    if (!formData.service || !formData.provider || !formData.client || !formData.date || !formData.time) {
+      toast.error('Por favor complete todos los campos requeridos');
+      return;
+    }
+    // Si todo está bien, enviar los datos
+     onSave({
+    ...formData,
+    id: isEditing ? appointment.id : Date.now(), // Generar ID si es nueva cita
+  });
   };
 
   if (!isOpen) return null;

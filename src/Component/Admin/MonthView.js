@@ -8,13 +8,14 @@ import {
   isSameDay, 
   format 
 } from 'date-fns';
-import { es } from 'date-fns/locale';
+
 
 const MonthView = React.memo(({ 
     currentDate, 
     appointments, 
     onAppointmentClick,
-    getAppointmentsForDay 
+    getAppointmentsForDay,
+    onDayClick 
   }) => {
     // Agregar logs para depuración
     console.log('MonthView Props:', {
@@ -46,6 +47,8 @@ const MonthView = React.memo(({
             <div 
               key={index}
               className={`day-cell ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`}
+              onClick={()=> onDayClick(day)}
+              style={{cursor: 'pointer'}}
             >
               <span className="day-number">{format(day, 'd')}</span>
               <div className="day-appointments">

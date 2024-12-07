@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { 
   format, 
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  eachDayOfInterval,
-  isSameMonth,
-  isSameDay,
   addMonths,
   subMonths,
   parseISO,
-  getHours,
-  getMinutes
 } from "date-fns";
 import { es } from "date-fns/locale";
 import { 
@@ -21,16 +12,10 @@ import {
   FaPlus, 
   FaFilter, 
   FaCog,
-  FaEdit,
-  FaTrash 
 } from "react-icons/fa";
 
 // Importa los datos de prueba
-import mockAppointments, { 
-  AVAILABLE_SERVICES, 
-  SERVICE_PROVIDERS, 
-  APPOINTMENT_STATUS 
-} from '../../Data/mockAppointments'; // Nota el cambio aquí de mockAppointments a mockAppoiment
+import mockAppointments from '../../Data/mockAppointments'; // Nota el cambio aquí de mockAppointments a mockAppoiment
 
 
 // Importación de componentes
@@ -39,8 +24,10 @@ import WeekView from './WeekView';
 import DayView from './DayView';
 import AppointmentModal from './AppoimentModal';
 import ConfirmationModal from './ConfimationModal';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+
 import "../../Styles/Admin.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Valores por defecto para el formulario de citas
 const defaultAppointmentForm = {
@@ -133,15 +120,6 @@ const Calendar = () => {
   };
 
 
-  
-
-  // Abrir modal para editar cita
-  const handleEditAppointment = (appointment) => {
-    setIsEditing(true);
-    setSelectedAppointment(appointment);
-    setAppointmentForm(appointment);
-    setShowAppointmentModal(true);
-  };
 
   // Iniciar proceso de eliminación de cita
   const handleDeleteAppointment = (appointment) => {
@@ -150,6 +128,11 @@ const Calendar = () => {
   };
 
   const handleSaveAppointment = (appointmentData) => {
+    if (checkTimeOverlap(appointmentData)) {
+      toast.error('Error: La cita se superpone con otra cita existente');
+      return;
+    }
+
     if (isEditing) {
       // Actualizar cita existente
       setAppointments(prev => 
@@ -171,59 +154,12 @@ const Calendar = () => {
 
   // ================ MANEJADORES DE FORMULARIO ================
 
-  // Manejar cambios en el formulario
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setAppointmentForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   // Manejar envío del formulario
-  const handleSubmitAppointment = (e) => {
-    e.preventDefault();
-    
-    const newAppointment = {
-      ...appointmentForm,
-      id: isEditing ? selectedAppointment.id : appointments.length + 1,
-    };
-
-    // Validar la cita antes de guardar
-    if (!validateAppointment(newAppointment)) return;
-
-    if (isEditing) {
-      setAppointments(prev => 
-        prev.map(apt => apt.id === newAppointment.id ? newAppointment : apt)
-      );
-      toast.success('Cita actualizada exitosamente');
-    } else {
-      setAppointments(prev => [...prev, newAppointment]);
-      toast.success('Cita creada exitosamente');
-    }
-
-    handleCloseModal();
-  };
-
+ 
     // ================ FUNCIONES AUXILIARES ================
 
   // Validar cita antes de guardar
-  const validateAppointment = (appointment) => {
-    // Validar que la fecha no sea en el pasado
-    const appointmentDateTime = new Date(`${appointment.date}T${appointment.time}`);
-    if (appointmentDateTime < new Date()) {
-      toast.error('No se pueden crear citas en el pasado');
-      return false;
-    }
 
-    // Validar superposición de horarios
-    if (checkTimeOverlap(appointment)) {
-      toast.error('El horario se superpone con otra cita del mismo proveedor');
-      return false;
-    }
-
-    return true;
-  };
 
   // Verificar superposición de horarios
   const checkTimeOverlap = (newAppointment) => {
@@ -281,15 +217,14 @@ const Calendar = () => {
     });
   };
 
+  // Agregar este nuevo manejador
+const handleDayClick = (day) => {
+  setCurrentDate(day);
+  setViewMode("day");
+};
+
   // ================ MANEJADORES DE MODALES ================
 
-  // Cerrar modal de citas
-  const handleCloseModal = () => {
-    setShowAppointmentModal(false);
-    setAppointmentForm(defaultAppointmentForm);
-    setIsEditing(false);
-    setSelectedAppointment(null);
-  };
 
   // Confirmar eliminación de cita
   const handleConfirmDelete = () => {
@@ -362,6 +297,7 @@ const Calendar = () => {
             onAppointmentClick={handleAppointmentClick}
             onDeleteAppointment={handleDeleteAppointment}
             getAppointmentsForDay={getAppointmentsForDay}
+            onDayClick={handleDayClick}
           />
         )}
 
@@ -412,7 +348,17 @@ const Calendar = () => {
         />
       )}
       
-      
+      <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
 
 
 
