@@ -26,16 +26,6 @@ const AppointmentCalendar = ({ onSelectDateTime, bookedTimes }) => {
     }
   };
 
-  const filterAvailableTime = (time) => {
-    // Verificar si la hora ya está reservada
-    const isBooked = bookedTimes?.some(bookedTime => {
-      const booked = new Date(bookedTime);
-      return time.getTime() === booked.getTime();
-    });
-
-    return !isBooked && filterPassedTime(time);
-  };
-
   
 
   return (

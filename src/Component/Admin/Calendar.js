@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { 
-  format, 
+import {
+  format,
   addMonths,
   subMonths,
   parseISO,
@@ -10,8 +10,8 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
   FaPlus, 
-  FaFilter, 
-  FaCog,
+  FaFilter,
+  FaCog, 
 } from "react-icons/fa";
 
 // Importa los datos de prueba
@@ -29,17 +29,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import "../../Styles/Admin.css";
 import 'react-toastify/dist/ReactToastify.css';
 
-// Valores por defecto para el formulario de citas
-const defaultAppointmentForm = {
-  service: '',
-  provider: '',
-  client: '',
-  date: new Date().toISOString().split('T')[0],
-  time: '09:00',
-  duration: 60,
-  price: '',
-  status: 'pending'
-};
+
 
 const Calendar = () => {
   // ================ ESTADOS ================
@@ -53,16 +43,12 @@ const Calendar = () => {
   // Estados relacionados con las citas
   const [appointments, setAppointments] = useState(mockAppointments);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [appointmentForm, setAppointmentForm] = useState(defaultAppointmentForm);
   
   // Estados de los modales
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Estados de filtros
-  const [selectedClient, setSelectedClient] = useState(null);
-  const [showMyVisitsOnly, setShowMyVisitsOnly] = useState(false);
 
   // ================ EFECTOS ================
 
@@ -120,7 +106,6 @@ const Calendar = () => {
   };
 
 
-
   // Iniciar proceso de eliminación de cita
   const handleDeleteAppointment = (appointment) => {
     setSelectedAppointment(appointment);
@@ -152,6 +137,7 @@ const Calendar = () => {
   };
 
 
+<
   // ================ MANEJADORES DE FORMULARIO ================
 
   // Manejar envío del formulario
@@ -179,6 +165,7 @@ const Calendar = () => {
       );
     });
   };
+  // ================ MANEJADORES DE FORMULARIO ===============
 
   // Función mejorada para obtener citas de un día específico
   const getAppointmentsForDay = (day) => {
@@ -236,7 +223,8 @@ const handleDayClick = (day) => {
     setSelectedAppointment(null);
   };
   // ================ RENDERIZADO ================
-  return (
+
+  return(
     <div className="calendar-container">
       {/* Barra de herramientas */}
       <div className="calendar-toolbar">

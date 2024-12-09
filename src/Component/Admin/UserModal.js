@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 const UserModal = ({ isOpen, onClose, onSave, user = null, isEditing = false }) => {
@@ -17,17 +17,6 @@ const UserModal = ({ isOpen, onClose, onSave, user = null, isEditing = false }) 
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        ...user,
-        password: '',
-        confirmPassword: ''
-      });
-    } else {
-      setFormData(initialState);
-    }
-  }, [user]);
 
   const validateForm = () => {
     const newErrors = {};

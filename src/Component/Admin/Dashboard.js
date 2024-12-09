@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaUsers, FaClock, FaCut, FaBell, FaCog, FaSearch, FaSignOutAlt } from 'react-icons/fa';
 import Calendar from './Calendar';
 import ManageServices from './ManageServices';
@@ -11,7 +10,6 @@ const Dashboard = () => {
   const [activeMenu, setActiveMenu] = useState('calendar');
   const [searchQuery, setSearchQuery] = useState('');
   const { logout } = useAuth();
-  const navigate = useNavigate();
   
 
 
