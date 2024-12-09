@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../Component/Home';
 import LoadingSpinner from '../Component/LoadingSpinner';
-import {Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 
 // Lazy loading de componentes existentes

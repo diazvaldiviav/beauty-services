@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { 
+import {
   format,
   addMonths,
   subMonths,
@@ -10,7 +10,7 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
   FaPlus, 
-  FaFilter, 
+  FaFilter,
   FaCog, 
 } from "react-icons/fa";
 
@@ -24,8 +24,10 @@ import WeekView from './WeekView';
 import DayView from './DayView';
 import AppointmentModal from './AppoimentModal';
 import ConfirmationModal from './ConfimationModal';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+
 import "../../Styles/Admin.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -104,9 +106,6 @@ const Calendar = () => {
   };
 
 
-  
-
-
   // Iniciar proceso de eliminación de cita
   const handleDeleteAppointment = (appointment) => {
     setSelectedAppointment(appointment);
@@ -114,6 +113,11 @@ const Calendar = () => {
   };
 
   const handleSaveAppointment = (appointmentData) => {
+    if (checkTimeOverlap(appointmentData)) {
+      toast.error('Error: La cita se superpone con otra cita existente');
+      return;
+    }
+
     if (isEditing) {
       // Actualizar cita existente
       setAppointments(prev => 
@@ -133,6 +137,34 @@ const Calendar = () => {
   };
 
 
+<
+  // ================ MANEJADORES DE FORMULARIO ================
+
+  // Manejar envío del formulario
+ 
+    // ================ FUNCIONES AUXILIARES ================
+
+  // Validar cita antes de guardar
+
+
+  // Verificar superposición de horarios
+  const checkTimeOverlap = (newAppointment) => {
+    const newStart = new Date(`${newAppointment.date}T${newAppointment.time}`);
+    const newEnd = new Date(newStart.getTime() + newAppointment.duration * 60000);
+
+    return appointments.some(existing => {
+      if (existing.id === newAppointment.id) return false;
+      
+      const existingStart = new Date(`${existing.date}T${existing.time}`);
+      const existingEnd = new Date(existingStart.getTime() + existing.duration * 60000);
+
+      return (
+        existing.provider === newAppointment.provider &&
+        newStart < existingEnd &&
+        newEnd > existingStart
+      );
+    });
+  };
   // ================ MANEJADORES DE FORMULARIO ===============
 
   // Función mejorada para obtener citas de un día específico
@@ -172,7 +204,14 @@ const Calendar = () => {
     });
   };
 
+  // Agregar este nuevo manejador
+const handleDayClick = (day) => {
+  setCurrentDate(day);
+  setViewMode("day");
+};
+
   // ================ MANEJADORES DE MODALES ================
+
 
   // Confirmar eliminación de cita
   const handleConfirmDelete = () => {
@@ -246,6 +285,7 @@ const Calendar = () => {
             onAppointmentClick={handleAppointmentClick}
             onDeleteAppointment={handleDeleteAppointment}
             getAppointmentsForDay={getAppointmentsForDay}
+            onDayClick={handleDayClick}
           />
         )}
 
@@ -296,7 +336,17 @@ const Calendar = () => {
         />
       )}
       
-      
+      <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
 
 
 
