@@ -137,7 +137,7 @@ const Calendar = () => {
   };
 
 
-<
+
   // ================ MANEJADORES DE FORMULARIO ================
 
   // Manejar envío del formulario
