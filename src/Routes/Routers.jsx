@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../Component/Home';
-import LoadingSpinner from '../Component/LoadingSpinner';
+import Home from '../Component/Common/Home';
+import LoadingSpinner from '../Component/Common/LoadingSpinner';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 
 // Lazy loading de componentes existentes
-const LazyCart = lazy(() => import('../Component/Cart'));
-const LazyServiceDetails = lazy(() => import('../Component/ServiceDetails'));
-const LazyCheckout = lazy(() => import('../Component/Checkout'));
-const LazyLogin = lazy(() => import('../Component/Login'));
-const LazyRegister = lazy(() => import('../Component/Register'));
+const LazyCart = lazy(() => import('../Component/Common/Cart'));
+const LazyServiceDetails = lazy(() => import('../Component/Common/ServiceDetails'));
+const LazyCheckout = lazy(() => import('../Component/Common/Checkout'));
+const LazyLogin = lazy(() => import('../Component/Authentication/Login'));
+const LazyRegister = lazy(() => import('../Component/Authentication/Register'));
 const LazyAdminDashboard = lazy(() => import('../Component/Admin/Dashboard'));
 
 // Componente para rutas protegidas de admin

@@ -227,6 +227,7 @@ main, section:first-of-type {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
+    margin-left: 20px;
   }
 
 
@@ -298,7 +299,6 @@ main, section:first-of-type {
 
 @media (max-width: 480px) {
   .header {
-    flex-direction: column;
     padding: 0.5rem;
   }
 

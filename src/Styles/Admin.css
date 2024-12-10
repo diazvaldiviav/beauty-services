@@ -41,6 +41,10 @@
     min-height: 100vh;
     background-color: var(--gray-100);
   }
+
+  .admin-main{
+    margin-top:0;
+  }
   
   /* ==================================================
      BARRA LATERAL (SIDEBAR)

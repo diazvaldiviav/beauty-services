@@ -1,9 +1,9 @@
 // src/components/ServiceSidebar.js
 import React from "react";
-import "../Styles/Style.css";
+import "../../Styles/Style.css";
 import { useState } from "react";
-import services from "../Data/Services";
-import servicesToAppointment from "../Data/ServicesToAppoiment";
+import services from "../../Data/Services";
+import servicesToAppointment from "../../Data/ServicesToAppoiment";
 
 // Componente `ServiceSidebar` que muestra el sidebar con la lista de servicios
 const ServiceSidebar = ({ isOpen, onClose }) => {

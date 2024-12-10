@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import aboutPhoto from "../assets/header_photo2.jpg";
+import aboutPhoto from "../../assets/header_photo2.jpg";
 
 const Services = (props) => {
   const [showAll, setShowAll] = useState(false);

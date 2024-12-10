@@ -1,6 +1,6 @@
 import React from 'react';
-import "../Styles/Style.css";
-import headerPhoto from "../assets/freepik__upload__11626.jpeg";
+import "../../Styles/Style.css";
+import headerPhoto from "../../assets/freepik__upload__11626.jpeg";
 
 const Home = () => {
   return (

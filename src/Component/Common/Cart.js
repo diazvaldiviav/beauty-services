@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Appointmenttest from "../Data/Appoinmenttest";
+import Appointmenttest from "../../Data/Appoinmenttest";
 import Modal from "./Modal";
 import Checkout from "./Checkout"; // Importamos el nuevo componente
 

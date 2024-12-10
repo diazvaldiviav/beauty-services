@@ -1,5 +1,5 @@
 import React from 'react';
-import clientImage from '../assets/client-image.jpg'; // Asegúrate de tener esta imagen
+import clientImage from '../../assets/client-image.jpg'; // Asegúrate de tener esta imagen
 
 const ValueMessage = () => {
   return (

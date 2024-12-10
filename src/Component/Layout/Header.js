@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import "../Styles/Style.css";
+import "../../Styles/Style.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth } from '../Context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 

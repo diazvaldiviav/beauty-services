@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/Style.css';
+import '../../Styles/Style.css';
 
 function Modal({ title, message, onAccept, onReject, showRejectButton = true }) {
     return (

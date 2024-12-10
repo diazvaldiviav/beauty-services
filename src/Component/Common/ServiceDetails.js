@@ -1,12 +1,12 @@
-import services from "../Data/Services";
+import services from "../../Data/Services";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import aboutPhoto from "../assets/header_photo2.jpg";
+import aboutPhoto from "../../assets/header_photo2.jpg";
 import ServiceSidebar from "./ServiceSidebar";
 import AppointmentCalendar from "./AppoinmentCalendar";
 import UserForm from "./Form";
-import Appointmenttest from "../Data/Appoinmenttest";
-import servicesToAppointment from "../Data/ServicesToAppoiment";
+import Appointmenttest from "../../Data/Appoinmenttest";
+import servicesToAppointment from "../../Data/ServicesToAppoiment";
 import Modal from "./Modal";
 
 function ServiceDetails() {
